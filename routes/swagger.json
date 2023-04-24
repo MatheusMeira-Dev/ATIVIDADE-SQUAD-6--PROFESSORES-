@@ -1,0 +1,376 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API de Produtos Totalmente Funcional",
+      "description": "API para fins comerciais, que informa o funcionamento de cadastro de produtos e manipulações",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000"
+      }
+    ],
+    "paths": {
+        "/produtos": {
+            "get": {
+                "tags": ["Produtos"],
+                "summary": "Obter todos os Produtos",
+                "description": "Retorna uma lista de todos os Produtos registrados",
+                "responses": {
+                  "200": {
+                    "description": "OK",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "array",
+                          "items": {
+                              "nome": {
+                                  "type": "string",
+                                  "null": false,
+                                  "description": "Nome do Produto"
+                                },
+                                "descricao": {
+                                  "type": "string",
+                                  "null": false,
+                                  "description": "Descrição do prduto"
+                                },
+                                "quantidade": {
+                                  "type": "number",
+                                  "null": false,
+                                  "description": "Quantidade do Produto"
+                                },
+                                "preco": {
+                                  "type": "number",
+                                  "null": false,
+                                  "description": "Preço do Produto"
+                                },
+                                "desconto": {
+                                  "type": "number",
+                                  "null": false,
+                                  "description": "Desconto do Produto"
+                                },
+                                "dataDesconto": {
+                                  "type": "string",
+                                  "null": false,
+                                  "description": "Data do desconto"
+                                },
+                                "categoria": {
+                                  "type": "string",
+                                  "null": false,
+                                  "description": "Categoria do Produto"
+                                }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "500": {
+                    "description": "Erro interno do servidor"
+                  }
+                }
+            },
+            "post":{
+              "tags": ["Produtos"],
+              "summary": "Criar um novo Produto",
+              "description": "Cria um novo produto passando as informações no Body.json",
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "nome": {
+                          "type": "string",
+                          "null": false,
+                          "description": "Nome do Produto"
+                        },
+                        "descricao": {
+                          "type": "string",
+                          "null": false,
+                          "description": "Descrição do prduto"
+                        },
+                        "quantidade": {
+                          "type": "number",
+                          "null": false,
+                          "description": "Quantidade do Produto"
+                        },
+                        "preco": {
+                          "type": "number",
+                          "null": false,
+                          "description": "Preço do Produto"
+                        },
+                        "desconto": {
+                          "type": "number",
+                          "null": false,
+                          "description": "Desconto do Produto"
+                        },
+                        "dataDesconto": {
+                          "type": "string",
+                          "null": false,
+                          "description": "Data do desconto"
+                        },
+                        "categoria": {
+                          "type": "string",
+                          "null": false,
+                          "description": "Categoria do Produto"
+                        }
+                      },
+                      "example": 
+                      {
+                        "nome": "Oleo de moto XRACE",
+                        "descricao": "É um belo Oleo de moto",
+                        "quantidade": 34,
+                        "preco": 67,
+                        "desconto": 5,
+                        "dataDesconto": "2023-04-13",
+                        "categoria": "Autopeças"
+                    }
+                      
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "201": {
+                  "description": "criado com sucesso"
+                },
+                "400": {
+                  "description": "Requisição inválida"
+                },
+                "500": {
+                  "description": "Erro interno do servidor"
+                }
+              }
+          }
+        },
+        "/produtos/{id}": {
+          "get": {
+            "tags": ["Produtos"],
+            "summary": "Obter Produto pelo ID",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "description": "ID do Produto",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "description": "Retorna um Produto registrado utilizando o ID do mesmo",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                          "nome": {
+                              "type": "string",
+                              "null": false,
+                              "description": "Nome do Produto"
+                            },
+                            "descricao": {
+                              "type": "string",
+                              "null": false,
+                              "description": "Descrição do prduto"
+                            },
+                            "quantidade": {
+                              "type": "number",
+                              "null": false,
+                              "description": "Quantidade do Produto"
+                            },
+                            "preco": {
+                              "type": "number",
+                              "null": false,
+                              "description": "Preço do Produto"
+                            },
+                            "desconto": {
+                              "type": "number",
+                              "null": false,
+                              "description": "Desconto do Produto"
+                            },
+                            "dataDesconto": {
+                              "type": "string",
+                              "null": false,
+                              "description": "Data do desconto"
+                            },
+                            "categoria": {
+                              "type": "string",
+                              "null": false,
+                              "description": "Categoria do Produto"
+                            }
+                      }
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Erro interno do servidor"
+              }
+            }
+        },
+        "put":{
+          "tags": ["Produtos"],
+          "summary": "Editar um Produto",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID do Produto",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "description": "Edita um produto passando as informações no Body.json e indentificando o mesmo pelo ID",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nome": {
+                      "type": "string",
+                      "null": false,
+                      "description": "Nome do Produto"
+                    },
+                    "descricao": {
+                      "type": "string",
+                      "null": false,
+                      "description": "Descrição do prduto"
+                    },
+                    "quantidade": {
+                      "type": "number",
+                      "null": false,
+                      "description": "Quantidade do Produto"
+                    },
+                    "preco": {
+                      "type": "number",
+                      "null": false,
+                      "description": "Preço do Produto"
+                    },
+                    "desconto": {
+                      "type": "number",
+                      "null": false,
+                      "description": "Desconto do Produto"
+                    },
+                    "dataDesconto": {
+                      "type": "string",
+                      "null": false,
+                      "description": "Data do desconto"
+                    },
+                    "categoria": {
+                      "type": "string",
+                      "null": false,
+                      "description": "Categoria do Produto"
+                    }
+                  },
+                  "example": 
+                  {
+                    "nome": "Processador Ryzen",
+                    "descricao": "É um otimo processador ",
+                    "quantidade": 56,
+                    "preco": 1200,
+                    "desconto": 50,
+                    "dataDesconto": "2023-05-15",
+                    "categoria": "Computador"
+                }
+                  
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Editado com sucesso"
+            },
+            "400": {
+              "description": "Requisição inválida"
+            },
+            "500": {
+              "description": "Erro interno do servidor"
+            }
+          }
+      },
+          "delete": {
+            "tags": ["Produtos"],
+            "summary": "Deleta um Produtos",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "description": "ID do Produto",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "description": "Deleta um produto intentificando pelo seu ID",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                          "nome": {
+                              "type": "string",
+                              "null": false,
+                              "description": "Nome do Produto"
+                            },
+                            "descricao": {
+                              "type": "string",
+                              "null": false,
+                              "description": "Descrição do prduto"
+                            },
+                            "quantidade": {
+                              "type": "number",
+                              "null": false,
+                              "description": "Quantidade do Produto"
+                            },
+                            "preco": {
+                              "type": "number",
+                              "null": false,
+                              "description": "Preço do Produto"
+                            },
+                            "desconto": {
+                              "type": "number",
+                              "null": false,
+                              "description": "Desconto do Produto"
+                            },
+                            "dataDesconto": {
+                              "type": "string",
+                              "null": false,
+                              "description": "Data do desconto"
+                            },
+                            "categoria": {
+                              "type": "string",
+                              "null": false,
+                              "description": "Categoria do Produto"
+                            }
+                      }
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Erro interno do servidor"
+              }
+            }
+        }
+        },
+        "/produtos-filtragem": {
+          "get": {
+            
+          }
+        }
+    }
+}

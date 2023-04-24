@@ -91,4 +91,56 @@ router.delete("/Produtos/:id", async (req, res) => {
     }
 });
 
+router.get('/produtos-filtragem', async (req, res) => {
+    try {
+
+        //quando for maior que X quantidade
+      const filter = {};
+      if (req.query.quantidademaior) {
+        filter.quantidade = { $gte: req.query.quantidademaior }; 
+      }
+
+      // quando for menor que X
+      if (req.query.quantidademenor) {
+        filter.quantidade = { $lte: req.query.quantidademenor }; 
+      }
+
+      // quando for maior que x preço
+      if (req.query.precomaior) {
+        filter.preco = { $gte: req.query.precomaior }; 
+      }
+
+      // quando o preço for menor que x
+      if (req.query.precomenor) {
+        filter.preco = { $lte: req.query.precomenor }; 
+      }
+
+      // Descontos maiores que X
+      if (req.query.descontomaior) {
+        filter.desconto = { $gte: req.query.descontomaior }; 
+      }
+
+        //Buscar apenas X categoria
+
+      if (req.query.categoria) {
+
+        filter.categoria =  { $regex: new RegExp(req.query.categoria, 'i') } 
+
+    }
+
+      //Buscar apenas X nome
+
+      if (req.query.nome) {
+
+        filter.nome =  { $regex: new RegExp(req.query.nome, 'i') } 
+
+    }
+
+      const produtos = await Produto.find(filter);
+      res.status(200).json(produtos);
+    } catch (error) {
+      res.status(500).json({ message: "Um erro aconteceu" });
+      console.log(error)
+    }  });
+
 module.exports = router;
