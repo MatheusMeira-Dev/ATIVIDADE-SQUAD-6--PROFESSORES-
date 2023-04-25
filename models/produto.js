@@ -18,7 +18,7 @@ const Produto = model("produto", new Schema({
         required: true
     },
     desconto: {
-       type: Number,
+        type: Number,
         required: true
     },
     dataDesconto: {

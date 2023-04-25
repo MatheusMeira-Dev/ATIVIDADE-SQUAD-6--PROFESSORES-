@@ -72,11 +72,11 @@
             "post":{
               "tags": ["Produtos"],
               "summary": "Criar um novo Produto",
-              "description": "Cria um novo produto passando as informações no Body.json",
+              "description": "Cria um novo produto passando as informações no Body.json (todos os campos não podem ser nulos, o de imagem não é necessário, mas para fazer o upload do arquivo deve utilizar o form-Data)",
               "requestBody": {
                 "required": true,
-                "content": {
-                  "application/json": {
+                "content": { 
+                  "multipart/form-data": {
                     "schema": {
                       "type": "object",
                       "properties": {
@@ -114,6 +114,10 @@
                           "type": "string",
                           "null": false,
                           "description": "Categoria do Produto"
+                        },
+                        "file": {
+                          "type": "string",
+                          "format": "binary"
                         }
                       },
                       "example": 
