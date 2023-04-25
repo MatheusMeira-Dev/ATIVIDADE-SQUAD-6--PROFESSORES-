@@ -369,7 +369,106 @@
         },
         "/produtos-filtragem": {
           "get": {
-            
+            "tags": [
+              "Produtos"
+            ],
+            "summary": "Busca produtos com filtros pela Query",
+            "description": "Retorna uma lista de produtos filtrados de acordo com as query strings informadas.",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "quantidademaior",
+                "in": "query",
+                "description": "Quantidade mínima de produtos disponíveis",
+                "type": "number"
+              },
+              {
+                "name": "quantidademenor",
+                "in": "query",
+                "description": "Quantidade máxima de produtos disponíveis",
+                "type": "number"
+              },
+              {
+                "name": "precomaior",
+                "in": "query",
+                "description": "Preço mínimo dos produtos",
+                "type": "number"
+              },
+              {
+                "name": "precomenor",
+                "in": "query",
+                "description": "Preço máximo dos produtos",
+                "type": "number"
+              },
+              {
+                "name": "descontomaior",
+                "in": "query",
+                "description": "Desconto mínimo dos produtos",
+                "type": "number"
+              },
+              {
+                "name": "categoria",
+                "in": "query",
+                "description": "Nome da categoria para filtrar os produtos",
+                "type": "string"
+              },
+              {
+                "name": "nome",
+                "in": "query",
+                "description": "Nome do produto para filtrar",
+                "type": "string"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Lista de produtos encontrados",
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "nome": {
+                      "type": "string",
+                      "null": false,
+                      "description": "Nome do Produto"
+                    },
+                    "descricao": {
+                      "type": "string",
+                      "null": false,
+                      "description": "Descrição do prduto"
+                    },
+                    "quantidade": {
+                      "type": "number",
+                      "null": false,
+                      "description": "Quantidade do Produto"
+                    },
+                    "preco": {
+                      "type": "number",
+                      "null": false,
+                      "description": "Preço do Produto"
+                    },
+                    "desconto": {
+                      "type": "number",
+                      "null": false,
+                      "description": "Desconto do Produto"
+                    },
+                    "dataDesconto": {
+                      "type": "string",
+                      "null": false,
+                      "description": "Data do desconto"
+                    },
+                    "categoria": {
+                      "type": "string",
+                      "null": false,
+                      "description": "Categoria do Produto"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Erro interno do servidor"
+              }
+            }
           }
         }
     }

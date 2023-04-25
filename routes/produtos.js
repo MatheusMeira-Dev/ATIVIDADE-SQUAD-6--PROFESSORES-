@@ -1,20 +1,46 @@
 const { Router } = require("express");
-const Produto = require("../models/produto")
+const Produto = require("../models/produto");
+const upload = require("../config/multer");
 const router = Router();
 
-// const { nome, 
-// descricao, 
-// quantidade, 
-// preco, 
-// desconto, 
-// dataDesconto, 
-// categoria, 
-// imagemProduto } = req.body;
+//para crirar o produdo com imagem utilizar o form-data no corpo de requisição do cliente com um file
 
-router.post("/produtos", async (req, res) => {
+router.post("/produtos",upload.single("file"), async (req, res) => {
         try { 
-            const produto = new Produto(req.body);
-            await produto.save();
+            const {
+                nome, 
+                descricao, 
+                quantidade, 
+                preco, 
+                desconto,
+                dataDesconto, 
+                categoria, 
+                } = req.body;
+                const file = req.file
+                if (file) {
+                    const produto = new Produto({
+                        nome,
+                        descricao,
+                        quantidade,
+                        preco,
+                        desconto,
+                        dataDesconto,
+                        categoria,
+                        imagemProduto:file.path,
+                    });
+                await produto.save();
+                } else {
+                    const produto = new Produto({
+                        nome,
+                        descricao,
+                        quantidade,
+                        preco,
+                        desconto,
+                        dataDesconto,
+                        categoria,
+                    });
+                await produto.save();
+                }
             res.status(201).json({ message: "Produto cadastrado com sucesso"});
         } catch (err) {
             console.log(err);

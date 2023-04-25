@@ -31,7 +31,6 @@ const Produto = model("produto", new Schema({
     },
     imagemProduto: {
         type: String,
-        required: true
     },
 }))
 
